@@ -30,9 +30,12 @@ final class AppRootBuilder: Builder<AppRootDependency>, AppRootBuildable {
     
     let interactor = AppRootInteractor(presenter: tabBar)
     
+    /// 3개의 자식들
     let appHome = AppHomeBuilder(dependency: component)
     let financeHome = FinanceHomeBuilder(dependency: component)
     let profileHome = ProfileHomeBuilder(dependency: component)
+    
+    /// 자식들을 붙이는 역할
     let router = AppRootRouter(
       interactor: interactor,
       viewController: tabBar,

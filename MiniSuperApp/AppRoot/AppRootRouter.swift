@@ -42,10 +42,12 @@ final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControll
     let financeHomeRouting = financeHome.build(withListener: interactor)
     let profileHomeRouting = profileHome.build(withListener: interactor)
     
+    /// ribs 트리를 만들어 riblet들의 reference를 유지, interActor의 lifecycle 관련 메소드 호출
     attachChild(appHomeRouting)
     attachChild(financeHomeRouting)
     attachChild(profileHomeRouting)
     
+    /// viewController를 띄운다
     let viewControllers = [
       NavigationControllerable(root: appHomeRouting.viewControllable),
       NavigationControllerable(root: financeHomeRouting.viewControllable),
