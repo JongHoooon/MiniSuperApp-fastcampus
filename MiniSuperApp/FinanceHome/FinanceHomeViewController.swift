@@ -34,8 +34,12 @@ final class FinanceHomeViewController: UIViewController, FinanceHomePresentable,
   
   func setupViews() {
     title = "슈퍼페이"
-    tabBarItem = UITabBarItem(title: "슈퍼페이", image: UIImage(systemName: "creditcard"), selectedImage: UIImage(systemName: "creditcard.fill"))
-    view.backgroundColor = .systemBlue
+    tabBarItem = UITabBarItem(
+      title: "슈퍼페이",
+      image: UIImage(systemName: "creditcard"),
+      selectedImage: UIImage(systemName: "creditcard.fill")
+    )
+    view.backgroundColor = .systemBackground
     view.addSubview(stackView)
     
     NSLayoutConstraint.activate([
@@ -43,5 +47,13 @@ final class FinanceHomeViewController: UIViewController, FinanceHomePresentable,
       stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
     ])
+  }
+  
+  func addDashboard(_ view: ViewControllable) {
+    let vc = view.uiviewController
+    
+    addChild(vc)
+    stackView.addArrangedSubview(vc.view)
+    vc.didMove(toParent: self)
   }
 }
