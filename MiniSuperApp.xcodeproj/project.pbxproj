@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EDE564D42A4C98F700DEE204 /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = EDE564D32A4C98F700DEE204 /* CombineExt */; };
+		EDE564D62A4C992000DEE204 /* Combine+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE564D52A4C992000DEE204 /* Combine+Utils.swift */; };
+		EDE564D82A4D9F8B00DEE204 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE564D72A4D9F8B00DEE204 /* Formatter.swift */; };
 		EDFA5EA42A4AD14800747D27 /* ModernRIBs in Frameworks */ = {isa = PBXBuildFile; productRef = EDFA5EA32A4AD14800747D27 /* ModernRIBs */; };
 		EDFA5EB52A4AF48D00747D27 /* SuperPayDashboardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFA5EB12A4AF48D00747D27 /* SuperPayDashboardRouter.swift */; };
 		EDFA5EB62A4AF48D00747D27 /* SuperPayDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFA5EB22A4AF48D00747D27 /* SuperPayDashboardViewController.swift */; };
@@ -51,6 +54,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EDE564D52A4C992000DEE204 /* Combine+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+Utils.swift"; sourceTree = "<group>"; };
+		EDE564D72A4D9F8B00DEE204 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		EDFA5EA52A4AE85400747D27 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EDFA5EB12A4AF48D00747D27 /* SuperPayDashboardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPayDashboardRouter.swift; sourceTree = "<group>"; };
 		EDFA5EB22A4AF48D00747D27 /* SuperPayDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPayDashboardViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDE564D42A4C98F700DEE204 /* CombineExt in Frameworks */,
 				EDFA5EA42A4AD14800747D27 /* ModernRIBs in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,6 +121,7 @@
 				EDFA5EB22A4AF48D00747D27 /* SuperPayDashboardViewController.swift */,
 				EDFA5EB32A4AF48D00747D27 /* SuperPayDashboardBuilder.swift */,
 				EDFA5EB42A4AF48D00747D27 /* SuperPayDashboardInteractor.swift */,
+				EDE564D72A4D9F8B00DEE204 /* Formatter.swift */,
 			);
 			path = SupperPayDashBoard;
 			sourceTree = "<group>";
@@ -166,6 +173,7 @@
 				F5EAA231270B3A8F00EF2B70 /* UIView+Utils.swift */,
 				F5EAA21F270B39DC00EF2B70 /* PushModalPresentationController.swift */,
 				F5EAA22F270B3A7100EF2B70 /* RIBs+Utils.swift */,
+				EDE564D52A4C992000DEE204 /* Combine+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -274,6 +282,7 @@
 			name = MiniSuperApp;
 			packageProductDependencies = (
 				EDFA5EA32A4AD14800747D27 /* ModernRIBs */,
+				EDE564D32A4C98F700DEE204 /* CombineExt */,
 			);
 			productName = SuperRedApp;
 			productReference = F5829F5526DB2BC400BFA8CD /* MiniSuperApp.app */;
@@ -304,6 +313,7 @@
 			mainGroup = F5829F4C26DB2BC400BFA8CD;
 			packageReferences = (
 				EDFA5EA22A4AD14800747D27 /* XCRemoteSwiftPackageReference "ModernRIBs" */,
+				EDE564D22A4C98F700DEE204 /* XCRemoteSwiftPackageReference "CombineExt" */,
 			);
 			productRefGroup = F5829F5626DB2BC400BFA8CD /* Products */;
 			projectDirPath = "";
@@ -352,11 +362,13 @@
 				F5829F7726DB34AA00BFA8CD /* AppRootInteractor.swift in Sources */,
 				F5EAA22D270B3A4500EF2B70 /* RideTypeView.swift in Sources */,
 				EDFA5EB82A4AF48D00747D27 /* SuperPayDashboardInteractor.swift in Sources */,
+				EDE564D82A4D9F8B00DEE204 /* Formatter.swift in Sources */,
 				F5EAA219270B395900EF2B70 /* HomeWidgetView.swift in Sources */,
 				F57F6AFE26DB4CD700C0117D /* RootTabBarController.swift in Sources */,
 				EDFA5EB72A4AF48D00747D27 /* SuperPayDashboardBuilder.swift in Sources */,
 				F57F6AEB26DB4A2700C0117D /* FinanceHomeInteractor.swift in Sources */,
 				F5EAA21B270B395900EF2B70 /* AppHomeInteractor.swift in Sources */,
+				EDE564D62A4C992000DEE204 /* Combine+Utils.swift in Sources */,
 				F57F6AE826DB4A2700C0117D /* FinanceHomeRouter.swift in Sources */,
 				F57F6AE926DB4A2700C0117D /* FinanceHomeViewController.swift in Sources */,
 				F5829F5926DB2BC400BFA8CD /* AppDelegate.swift in Sources */,
@@ -562,6 +574,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EDE564D22A4C98F700DEE204 /* XCRemoteSwiftPackageReference "CombineExt" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineExt.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.8.1;
+			};
+		};
 		EDFA5EA22A4AD14800747D27 /* XCRemoteSwiftPackageReference "ModernRIBs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DevYeom/ModernRIBs.git";
@@ -573,6 +593,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EDE564D32A4C98F700DEE204 /* CombineExt */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EDE564D22A4C98F700DEE204 /* XCRemoteSwiftPackageReference "CombineExt" */;
+			productName = CombineExt;
+		};
 		EDFA5EA32A4AD14800747D27 /* ModernRIBs */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EDFA5EA22A4AD14800747D27 /* XCRemoteSwiftPackageReference "ModernRIBs" */;

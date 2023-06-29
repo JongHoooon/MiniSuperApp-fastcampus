@@ -19,8 +19,14 @@ protocol SuperPayDashboardViewControllable: ViewControllable {
 final class SuperPayDashboardRouter: ViewableRouter<SuperPayDashboardInteractable, SuperPayDashboardViewControllable>, SuperPayDashboardRouting {
 
     // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: SuperPayDashboardInteractable, viewController: SuperPayDashboardViewControllable) {
-        super.init(interactor: interactor, viewController: viewController)
+    override init(
+      interactor: SuperPayDashboardInteractable,
+      viewController: SuperPayDashboardViewControllable
+    ) {
+        super.init(
+          interactor: interactor,
+          viewController: viewController
+        )
         interactor.router = self
     }
 }
