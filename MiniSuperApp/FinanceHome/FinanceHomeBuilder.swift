@@ -5,16 +5,22 @@ protocol FinanceHomeDependency: Dependency {
   // created by this RIB.
 }
 
-final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency {
+final class FinanceHomeComponent: Component<FinanceHomeDependency>,
+                                  SuperPayDashboardDependency,
+                                  CardOnFileDashboardDependency {
   
-  var balance: ReadOnlyCurrentValuePublisher<Double> { balancePublisher } // 잔액 읽기 전용 
+  var balance: ReadOnlyCurrentValuePublisher<Double> { balancePublisher } // 잔액 읽기 전용
   private let balancePublisher: CurrentValuePublisher<Double> // 잔액 업데이트시 사용
+  
+  var cardsOnFileRepository: CardOnFileRepository
   
   init(
     dependency: FinanceHomeDependency,
-    balance: CurrentValuePublisher<Double>
+    balance: CurrentValuePublisher<Double>,
+    cardOnFileRepository: CardOnFileRepository
   ) {
     self.balancePublisher = balance
+    self.cardsOnFileRepository = cardOnFileRepository
     super.init(dependency: dependency)
   }
 }
@@ -33,20 +39,24 @@ final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHomeBuild
   
   func build(withListener listener: FinanceHomeListener) -> FinanceHomeRouting {
     let balancePublisher = CurrentValuePublisher<Double>(10000)
+    
     let component = FinanceHomeComponent(
       dependency: dependency,
-      balance: balancePublisher
+      balance: balancePublisher,
+      cardOnFileRepository: CardOnFileRepositoryImp()
     )
     let viewController = FinanceHomeViewController()
     let interactor = FinanceHomeInteractor(presenter: viewController)
     interactor.listener = listener
     
     let superPayDashboardBuilder = SuperPayDashboardBuilder(dependency: component)
+    let cardOnFileDashboardBuilder = CardOnFileDashboardBuilder(dependency: component)
     
     return FinanceHomeRouter(
       interactor: interactor,
       viewController: viewController,
-      superPayDashboardBuildable: superPayDashboardBuilder
+      superPayDashboardBuildable: superPayDashboardBuilder,
+      cardOnFileDashboardBuildable: cardOnFileDashboardBuilder
     )
   }
 }
