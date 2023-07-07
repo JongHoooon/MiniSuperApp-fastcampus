@@ -6,7 +6,11 @@ protocol CardOnFilePresentableListener: AnyObject {
   func didSelectItem(at: Int)
 }
 
-final class CardOnFileViewController: UIViewController, CardOnFilePresentable, CardOnFileViewControllable, UITableViewDataSource, UITableViewDelegate {
+final class CardOnFileViewController: UIViewController,
+                                      CardOnFilePresentable,
+                                      CardOnFileViewControllable,
+                                      UITableViewDataSource,
+                                      UITableViewDelegate {
   
   weak var listener: CardOnFilePresentableListener?
   
@@ -46,7 +50,11 @@ final class CardOnFileViewController: UIViewController, CardOnFilePresentable, C
     view.backgroundColor = .white
     view.addSubview(tableView)
     
-    setupNavigationItem(with: .back, target: self, action: #selector(didTapClose))
+    setupNavigationItem(
+      with: .back,
+      target: self,
+      action: #selector(didTapClose)
+    )
     
     NSLayoutConstraint.activate([
       tableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -63,7 +71,7 @@ final class CardOnFileViewController: UIViewController, CardOnFilePresentable, C
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell: CardOnFileCell = tableView.dequeueReusableCell(for: indexPath)
-
+    
     if let viewModel = viewModels[safe: indexPath.row] {
       cell.setImage(UIImage(color: viewModel.color))
       cell.setTitle("\(viewModel.name) \(viewModel.digits)")
@@ -71,7 +79,7 @@ final class CardOnFileViewController: UIViewController, CardOnFilePresentable, C
       cell.setImage(UIImage(systemName: "plus.rectangle"))
       cell.setTitle("카드 추가")
     }
-
+    
     return cell
   }
   

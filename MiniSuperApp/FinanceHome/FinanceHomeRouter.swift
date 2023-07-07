@@ -3,7 +3,8 @@ import ModernRIBs
 protocol FinanceHomeInteractable: Interactable,
                                   SuperPayDashboardListener,
                                   CardOnFileDashboardListener,
-                                  AddPaymentMethodListener {
+                                  AddPaymentMethodListener,
+                                  TopupListener {
   
   var router: FinanceHomeRouting? { get set }
   var listener: FinanceHomeListener? { get set }
@@ -23,8 +24,11 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable,FinanceHom
   private let cardOnFileDashboardBuildable: CardOnFileDashboardBuildable
   private var cardOnFileRouting: Routing?
   
-  private let AddPaymentMethodBuildable: AddPaymentMethodBuildable
+  private let addPaymentMethodBuildable: AddPaymentMethodBuildable
   private var addPaymentMethodRouting: Routing?
+  
+  private let topupBuildable: TopupBuildable
+  private var topupRouting: Routing?
   
   // TODO: Constructor inject child builder protocols to allow building children.
   init(
@@ -32,11 +36,13 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable,FinanceHom
     viewController: FinanceHomeViewControllable,
     superPayDashboardBuildable: SuperPayDashboardBuildable,
     cardOnFileDashboardBuildable: CardOnFileDashboardBuildable,
-    addPaymentMethodBuildable: AddPaymentMethodBuildable
+    addPaymentMethodBuildable: AddPaymentMethodBuildable,
+    topupBuildable: TopupBuildable
   ) {
     self.superPayDashboardBuildable = superPayDashboardBuildable
     self.cardOnFileDashboardBuildable = cardOnFileDashboardBuildable
-    self.AddPaymentMethodBuildable = addPaymentMethodBuildable
+    self.addPaymentMethodBuildable = addPaymentMethodBuildable
+    self.topupBuildable = topupBuildable
     super.init(
       interactor: interactor,
       viewController: viewController
@@ -70,7 +76,7 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable,FinanceHom
   func attachAddPaymentMethod() {
     if addPaymentMethodRouting != nil { return }
     
-    let router = AddPaymentMethodBuildable.build(withListener: interactor)
+    let router = addPaymentMethodBuildable.build(withListener: interactor)
     let navigation = NavigationControllerable(root: router.viewControllable)
     navigation.navigationController.presentationController?.delegate = interactor.presentationDelegateProxy
     viewControllable.present(navigation, animated: true, completion: nil)
@@ -86,5 +92,23 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable,FinanceHom
     viewControllable.dismiss(completion: nil)
     detachChild(router)
     addPaymentMethodRouting = nil
+  }
+  
+  func attatchTopup() {
+    guard topupRouting == nil else { return }
+    
+    let router = topupBuildable.build(withListener: interactor)
+    // topup은 viewless riblet 이라 router.viewControllable 존재하지 않는다.
+    // viewless riblet은 present 하지 않고 attachChild만 한다.
+    attachChild(router)
+    topupRouting = router
+  }
+  
+  func detachTopup() {
+    guard let router = topupRouting else { return }
+    
+    // viewless riblet은 dismiss 하지않고 detachChild만 한다.
+    detachChild(router)
+    topupRouting = nil
   }
 }

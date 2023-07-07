@@ -79,12 +79,8 @@ final class AddPaymentMethodViewController: UIViewController,
   private func setupViews() {
     title = "카드 추가"
     
-    navigationItem.leftBarButtonItem = UIBarButtonItem(
-      image: UIImage(
-        systemName: "xmark",
-        withConfiguration: UIImage.SymbolConfiguration(pointSize: 18.0, weight: .semibold)
-      ),
-      style: .plain,
+    setupNavigationItem(
+      with: .close,
       target: self,
       action: #selector(didTapClose)
     )

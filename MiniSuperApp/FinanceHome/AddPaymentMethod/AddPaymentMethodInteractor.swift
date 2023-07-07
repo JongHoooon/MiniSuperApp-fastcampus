@@ -68,6 +68,7 @@ final class AddPaymentMethodInteractor: PresentableInteractor<AddPaymentMethodPr
         receiveCompletion: { _ in },
         receiveValue: { [weak self] method in
           self?.listener?.addPaymentMethodDidAddCard(paymentMethod: method)
-        }).store(in: &cancellable)
+        }
+      ).store(in: &cancellable)
   }
 }
