@@ -1,8 +1,8 @@
 import ModernRIBs
 
 protocol FinanceHomeDependency: Dependency {
-  // TODO: Declare the set of dependencies required by this RIB, but cannot be
-  // created by this RIB.
+  var cardOnFileRepository: CardOnFileRepository { get }
+  var superPayRepository: SuperPayRepository { get }
 }
 
 final class FinanceHomeComponent: Component<FinanceHomeDependency>,
@@ -10,21 +10,24 @@ final class FinanceHomeComponent: Component<FinanceHomeDependency>,
                                   CardOnFileDashboardDependency,
                                   AddPaymentMethodDependency,
                                   TopupDependency {
-
-  var balance: ReadOnlyCurrentValuePublisher<Double> { balancePublisher } // 잔액 읽기 전용
-  private let balancePublisher: CurrentValuePublisher<Double> // 잔액 업데이트시 사용
   
-  let cardOnFileRepository: CardOnFileRepository
+  var cardOnFileRepository: CardOnFileRepository { dependency.cardOnFileRepository } // root에서 생성하게 수정
+  var superPayRepository: SuperPayRepository { dependency.superPayRepository }
+  var balance: ReadOnlyCurrentValuePublisher<Double> { superPayRepository.balance } // 잔액 읽기 전용
   let topupBaseViewController: ViewControllable
+  
+//  private let balancePublisher: CurrentValuePublisher<Double> // 잔액 업데이트시 사용 -> repository로 대체
   
   init(
     dependency: FinanceHomeDependency,
-    balance: CurrentValuePublisher<Double>,
-    cardOnFileRepository: CardOnFileRepository,
+//    balance: CurrentValuePublisher<Double>,    -> repository로 대체
+//    cardOnFileRepository: CardOnFileRepository, -> root 에서 생성하게 수정
+//    superPayRepository: SuperPayRepository,
     topupBaseViewController: ViewControllable
   ) {
-    self.balancePublisher = balance
-    self.cardOnFileRepository = cardOnFileRepository
+//    self.balancePublisher = balance
+//    self.cardOnFileRepository = cardOnFileRepository
+//    self.superPayRepository = superPayRepository
     self.topupBaseViewController = topupBaseViewController
     super.init(dependency: dependency)
   }
@@ -43,14 +46,12 @@ final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHomeBuild
   }
   
   func build(withListener listener: FinanceHomeListener) -> FinanceHomeRouting {
-    let balancePublisher = CurrentValuePublisher<Double>(10000)
+//    let balancePublisher = CurrentValuePublisher<Double>(10000)
     
     let viewController = FinanceHomeViewController()
     
     let component = FinanceHomeComponent(
       dependency: dependency,
-      balance: balancePublisher,
-      cardOnFileRepository: CardOnFileRepositoryImp(),
       topupBaseViewController: viewController
     )
     
