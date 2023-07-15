@@ -7,16 +7,16 @@
 
 import UIKit
 
-protocol AdaptivePresentationControllerDelegate: AnyObject {
+public protocol AdaptivePresentationControllerDelegate: AnyObject {
   func presentationControllerDidDismiss()
 }
 
-final class AdaptivePresentationControllerDelegateProxy: NSObject,
+public final class AdaptivePresentationControllerDelegateProxy: NSObject,
                                                          UIAdaptivePresentationControllerDelegate {
   
-  weak var delegate: AdaptivePresentationControllerDelegate?
+  public weak var delegate: AdaptivePresentationControllerDelegate?
   
-  func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+  public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
     delegate?.presentationControllerDidDismiss()
   }
 }
